@@ -132,6 +132,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4"
 
+" Map the <Leader> key to space
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+
 nnoremap <Leader>p :Files<CR>
 nnoremap <Leader>b :buffers<CR>:buffer<Space>
 nnoremap <Leader>g :grep -RF --exclude-dir={node_modules,build,coverage,dist} --exclude=tags<Space>
