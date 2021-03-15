@@ -15,6 +15,8 @@ if v:progname =~? "evim"
   finish
 endif
 
+set nocompatible
+
 " Get the defaults that most users want.
 source $VIMRUNTIME/defaults.vim
 
@@ -63,19 +65,23 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'sainnhe/gruvbox-material'
+Plug 'mhartington/oceanic-next'
+Plug 'sainnhe/sonokai'
+Plug 'sheerun/vim-polyglot'
+" Plug 'pangloss/vim-javascript'
+" Plug 'sainnhe/gruvbox-material'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'itchyny/lightline.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'hashivim/vim-terraform'
+" Plug 'yuezk/vim-js'
+" Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 " Theme
-syntax enable
+syntax on
 
 " Theme settings
 " for vim 8
@@ -149,9 +155,10 @@ endif
 
 imap jk <Esc>
 
-let g:gruvbox_material_disable_italic_comment = 1
-let g:gruvbox_material_background = 'hard'
-let g:gruvbox_material_palette = 'mix'
+" let g:gruvbox_material_disable_italic_comment = 1
+" let g:gruvbox_material_background = 'hard'
+" let g:gruvbox_material_palette = 'mix'
 
-set background=dark
-colorscheme gruvbox-material
+" set background=dark
+" colorscheme gruvbox-material
+colorscheme OceanicNext
