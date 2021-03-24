@@ -70,14 +70,15 @@ Plug 'sainnhe/sonokai'
 Plug 'sheerun/vim-polyglot'
 " Plug 'pangloss/vim-javascript'
 " Plug 'sainnhe/gruvbox-material'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'itchyny/lightline.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'hashivim/vim-terraform'
 " Plug 'yuezk/vim-js'
 " Plug 'maxmellon/vim-jsx-pretty'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " Theme
@@ -118,22 +119,16 @@ set backupdir=~/.vim/.backup//
 set directory=~/.vim/.swp//
 
 " Prettier settings
-let g:prettier#autoformat_require_pragma = 0
-let g:prettier#autoformat_config_present = 1
-let g:prettier#config#arrow_parens = 'avoid'
-let g:prettier#config#print_width = 120
-let g:prettier#config#config_precedence = 'prefer-file'
+" let g:prettier#autoformat_require_pragma = 0
+" let g:prettier#autoformat_config_present = 1
+" let g:prettier#config#arrow_parens = 'avoid'
+" let g:prettier#config#print_width = 120
+" let g:prettier#config#config_precedence = 'prefer-file'
 
 " Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
 
 " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4"
@@ -162,3 +157,30 @@ imap jk <Esc>
 " set background=dark
 " colorscheme gruvbox-material
 colorscheme OceanicNext
+
+" COC settings
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
